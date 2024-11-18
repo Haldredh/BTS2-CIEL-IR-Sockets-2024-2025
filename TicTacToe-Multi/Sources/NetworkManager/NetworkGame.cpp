@@ -18,17 +18,17 @@ NetworkGame::~NetworkGame()
 
 bool NetworkGame::HostGame()
 {
-	// À compléter :
+	// ï¿½ complï¿½ter :
 	// 1. Configurer le listener TCP sur NetworkPort
-	// 2. Ajouter le listener au sélecteur
-	// 3. Définir _isServer à true
+	// 2. Ajouter le listener au sï¿½lecteur
+	// 3. Dï¿½finir _isServer ï¿½ true
 	return true;
 }
 
 bool NetworkGame::WaitingAnOpponent()
 {
-	// À compléter :
-	// 1. Vérifier si une connexion est en attente avec le sélecteur
+	// ï¿½ complï¿½ter :
+	// 1. Vï¿½rifier si une connexion est en attente avec le sï¿½lecteur
 	// 2. Accepter la connexion
 	// 3. Envoyer le nom du joueur local
 	// 4. Configurer la connexion
@@ -102,9 +102,9 @@ void NetworkGame::StopPlaying()
 
 bool NetworkGame::SendMove(int row, int col)
 {
-	// À compléter :
-	// 1. Créer un paquet avec MagicPacket et PacketType::Move
-	// 2. Ajouter les coordonnées row et col
+	// ï¿½ complï¿½ter :
+	// 1. Crï¿½er un paquet avec MagicPacket et PacketType::Move
+	// 2. Ajouter les coordonnï¿½es row et col
 	// 3. Envoyer le paquet
 	return true;
 }
@@ -177,11 +177,11 @@ bool NetworkGame::SendLocalPlayerName()
 
 sf::Socket::Status NetworkGame::TryToReceivePacket(PacketType packetTypeExpect)
 {
-	// À compléter :
-	// 1. Vérifier si des données sont disponibles
+	// ï¿½ complï¿½ter :
+	// 1. Vï¿½rifier si des donnï¿½es sont disponibles
 	// 2. Recevoir le paquet
-	// 3. Vérifier le MagicPacket
-	// 4. Vérifier le type de paquet
+	// 3. Vï¿½rifier le MagicPacket
+	// 4. Vï¿½rifier le type de paquet
 	return sf::Socket::Done;
 }
 

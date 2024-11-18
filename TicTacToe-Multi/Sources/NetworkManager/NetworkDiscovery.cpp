@@ -15,11 +15,26 @@ NetworkDiscovery::~NetworkDiscovery()
 
 bool NetworkDiscovery::Init()
 {
-	// À compléter :
+	// ï¿½ complï¿½ter :
 	// 1. Essayer de lier le socket au port NetworkPort
-	// 2. Si échec, essayer les ports suivants jusqu'à succès
-	// 3. Ajouter le socket au sélecteur
-	return true;
+	sf::Socket::Status status;
+	status = _socket.bind(NetworkPort);
+	uint16_t port = NetworkPort+1;
+	// 2. Si ï¿½chec, essayer les ports suivants jusqu'ï¿½ succï¿½s
+
+	while(status != sf::Socket::Done || port >= 60000)
+	{	
+		status = _socket.bind(port);
+		port++;
+	}
+
+	// 3. Ajouter le socket au sï¿½lecteur
+	if (status == sf::Socket::Done) 
+	{
+		return true;
+	}
+
+	return false;
 }
 
 void NetworkDiscovery::Term()
@@ -45,9 +60,23 @@ void NetworkDiscovery::Update()
 
 	if(_isBroadcastEnabled)
 	{
-		// À compléter :
-		// 1. Vérifier si l'écart de temps entre maintenant et la dernière déclaration de temps est supérieure ou égale à DeclareGameServerDelayMs
-		// 2. Créer un paquet avec MagicPacket et _localServerName
+		// ï¿½ complï¿½ter :
+		// 1. Vï¿½rifier si l'ï¿½cart de temps entre maintenant et la derniï¿½re dï¿½claration de temps est supï¿½rieure ou ï¿½gale ï¿½ DeclareGameServerDelayMs
+		uint64_t Ecart;
+		if (_lastDeclareGameServerTimeMs != nowMs )
+		{
+			Ecart = nowMs - _lastDeclareGameServerTimeMs;
+		}
+
+		if (Ecart >= DeclareGameServerDelayMs )
+		{
+			
+		// 2. Crï¿½er un paquet avec MagicPacket et _localServerName
+			sf::Packet packet;
+    		packet << MagicPacket << _localServerName;
+			_socket.send(packet, sf::IpAddress::Broadcast, NetworkPort);
+		}
+
 		// 3. Envoyer le paquet en broadcast
 	}
 
